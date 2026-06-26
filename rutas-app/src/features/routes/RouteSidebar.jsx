@@ -61,6 +61,9 @@ export default function RouteSidebar({ rutas, rutaActivaId, onSeleccionar, loadi
                         <span className="truncate text-caption-md text-mute group-data-[active=true]:text-primary">
                           {titulo}
                         </span>
+                        <span className="ml-auto shrink-0 text-caption-md tabular-nums text-ash">
+                          {ruta.paradas.length}
+                        </span>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );

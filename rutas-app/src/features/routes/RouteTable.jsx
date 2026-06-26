@@ -81,7 +81,7 @@ export default function RouteTable({ ruta, paradas, targetStopNo }) {
               <td className="border border-hairline px-3 py-2 text-left font-semibold md:whitespace-nowrap">
                 {p.colonia}
               </td>
-              <td className="border border-hairline px-3 py-2 text-left text-body">
+              <td className="border border-hairline px-3 py-2 text-left text-body" title={p.referencia}>
                 {p.referencia}
               </td>
               {p.horarios.map((h, i) => (
