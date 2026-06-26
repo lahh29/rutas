@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Brand & ink ladder (design.md · Colors) === */
+  --color-canvas: #fdfcfc;
+  --color-ink: #201d1d;
+  --color-ink-deep: #0f0000;
+  --color-charcoal: #302c2c;
+  --color-body: #424245;
+  --color-mute: #646262;
+  --color-stone: #6e6e73;
+  --color-ash: #9a9898;
+
+  /* === Surfaces === */
+  --color-surface-soft: #f8f7f7;
+  --color-surface-card: #f1eeee;
+  --color-surface-dark: #201d1d;
+  --color-surface-dark-elevated: #302c2c;
+  --color-hairline: rgba(15, 0, 0, 0.12);
+  --color-hairline-strong: #646262;
+  --color-on-dark: #fdfcfc;
+  --color-on-primary: #fdfcfc;
+
+  /* === Semantic ramp (reserved) === */
+  --color-accent: #007aff;
+  --color-danger: #ff3b30;
+  --color-warning: #ff9f0a;
+  --color-success: #30d158;
+
+  /* === Typography: single monospaced face === */
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* === Type scale (design.md · Typography) === */
+  --text-display-xl: 38px;
+  --text-display-xl--line-height: 1.5;
+  --text-display-xl--font-weight: 700;
+
+  --text-display-mobile: 26px;
+  --text-display-mobile--line-height: 1.5;
+  --text-display-mobile--font-weight: 700;
+
+  --text-heading-md: 16px;
+  --text-heading-md--line-height: 1.5;
+  --text-heading-md--font-weight: 700;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.5;
+  --text-body-md--font-weight: 400;
+
+  --text-body-strong: 16px;
+  --text-body-strong--line-height: 1.5;
+  --text-body-strong--font-weight: 500;
+
+  --text-button-md: 16px;
+  --text-button-md--line-height: 2;
+  --text-button-md--font-weight: 500;
+
+  --text-caption-md: 14px;
+  --text-caption-md--line-height: 2;
+  --text-caption-md--font-weight: 400;
+
+  --text-table-cell: 13px;
+  --text-table-cell--line-height: 1.5;
+
+  /* === Spacing & radius === */
+  --spacing-section: 96px;
+  --radius-sm: 4px;
+}
+
+@layer base {
+  html {
+    @apply bg-canvas text-ink font-mono antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply min-h-screen;
+  }
+  /* Flat, halo-free focus signal (design.md · Inputs/Forms) */
+  :where(button, a, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Full-screen detail sheet entrance (mobile) */
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-sheet {
+  animation: sheet-in 0.22s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet {
+    animation: none;
+  }
+}
