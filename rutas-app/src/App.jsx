@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <h1 className="sr-only">Horarios de transporte Viño Plastic / UTEP</h1>
 
       <RouteSidebar
