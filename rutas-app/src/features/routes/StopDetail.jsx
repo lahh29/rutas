@@ -80,7 +80,11 @@ export default function StopDetail({ ruta, parada, onClose }) {
                 } ${i % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'}`}
               >
                 <span className="text-body-strong text-ink">{turno}</span>
-                <span className="text-body-md tabular-nums text-ink">
+                <span
+                  className={`text-body-md tabular-nums ${
+                    parada.horarios[i] === 'N/A' ? 'text-ash' : 'text-ink'
+                  }`}
+                >
                   {parada.horarios[i]}
                 </span>
               </li>

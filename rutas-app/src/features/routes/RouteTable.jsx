@@ -87,7 +87,9 @@ export default function RouteTable({ ruta, paradas, targetStopNo }) {
               {p.horarios.map((h, i) => (
                 <td
                   key={i}
-                  className="border border-hairline px-2 py-2 text-center tabular-nums"
+                  className={`border border-hairline px-2 py-2 text-center tabular-nums ${
+                    h === 'N/A' ? 'text-ash' : ''
+                  }`}
                 >
                   {h}
                 </td>
