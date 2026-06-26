@@ -18,7 +18,8 @@ export default function RouteExport({ ruta }) {
         backgroundColor: '#fdfcfc',
       });
       const link = document.createElement('a');
-      link.download = `Horarios-${ruta.id}.png`;
+      const fecha = new Date().toISOString().slice(0, 10);
+      link.download = `Horarios-${ruta.id}-${fecha}.png`;
       link.href = dataUrl;
       link.click();
     } catch (err) {

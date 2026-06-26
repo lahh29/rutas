@@ -8,6 +8,7 @@ export default function Footer() {
       <p>
         © {year} Viño Plastic / UTEP — Transporte de personal
       </p>
+      <p className="mt-1 text-ash">Consulta tu ruta, parada y horario en un solo lugar.</p>
     </footer>
   );
 }

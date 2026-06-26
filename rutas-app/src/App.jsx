@@ -18,6 +18,10 @@ function App() {
   const [targetStopNo, setTargetStopNo] = useState(null);
   const ruta = rutas.find((r) => r.id === rutaActivaId) ?? rutasOrdenadas[0];
 
+  useEffect(() => {
+    document.title = `${ruta.id} · Horarios de Transporte — VIÑOPLASTIC`;
+  }, [ruta.id]);
+
   // Brief initial skeleton for the route menu.
   const [menuLoading, setMenuLoading] = useState(true);
   useEffect(() => {
