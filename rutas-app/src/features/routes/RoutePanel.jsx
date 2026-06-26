@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import Brandbar from '../../components/Brandbar';
-import Notes from '../../components/Notes';
 import RouteTable from './RouteTable';
 import StopList from './StopList';
 import SearchBox from './SearchBox';
@@ -80,8 +79,6 @@ export default function RoutePanel({ ruta }) {
           </div>
         </>
       )}
-
-      <Notes notasRuta={ruta.notas} />
     </article>
   );
 }

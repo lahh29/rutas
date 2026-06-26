@@ -11,7 +11,6 @@ import {
   SidebarMenuItem,
   SidebarMenuSkeleton,
   SidebarRail,
-  SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar';
 
@@ -22,24 +21,16 @@ export default function RouteSidebar({ rutas, rutaActivaId, onSeleccionar, loadi
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="flex items-center justify-between gap-2 px-1 py-1">
-          <div className="flex min-w-0 items-center gap-2">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-ink text-on-dark">
-              <Bus className="size-5" />
+        <div className="flex min-w-0 items-center gap-2 px-1 py-1">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-ink text-on-dark">
+            <Bus className="size-5" />
+          </span>
+          {!colapsada && (
+            <span className="truncate text-body-strong font-bold text-ink">
+              Rutas UTEP
             </span>
-            {!colapsada && (
-              <span className="truncate text-body-strong font-bold text-ink">
-                Rutas UTEP
-              </span>
-            )}
-          </div>
-          {!colapsada && <SidebarTrigger />}
+          )}
         </div>
-        {colapsada && (
-          <div className="flex justify-center">
-            <SidebarTrigger />
-          </div>
-        )}
       </SidebarHeader>
 
       <SidebarContent>
