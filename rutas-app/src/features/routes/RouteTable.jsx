@@ -60,7 +60,7 @@ export default function RouteTable({ ruta, paradas }) {
               >
                 {p.no}
               </th>
-              <td className="border border-hairline px-3 py-2 text-left font-bold uppercase">
+              <td className="border border-hairline px-3 py-2 text-left font-bold uppercase md:whitespace-nowrap">
                 {p.colonia}
               </td>
               <td className="border border-hairline px-3 py-2 text-left text-body">
