@@ -68,7 +68,7 @@ export default function RouteTable({ ruta, paradas, targetStopNo }) {
             <tr
               key={p.no}
               id={`fila-${ruta.id}-${p.no}`}
-              className={`${idx % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'} ${
+              className={`transition-colors hover:bg-primary/5 ${idx % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'} ${
                 pulse === p.no ? 'ring-2 ring-inset ring-primary' : ''
               }`}
             >
