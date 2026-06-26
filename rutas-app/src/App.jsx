@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { Download, WifiOff } from 'lucide-react';
 import { rutas } from './data/rutas';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
 import RouteSidebar from './features/routes/RouteSidebar';
 import RouteTabs from './features/routes/RouteTabs';
 import RoutePanel from './features/routes/RoutePanel';
@@ -28,6 +30,34 @@ function App() {
     const t = setTimeout(() => setMenuLoading(false), 400);
     return () => clearTimeout(t);
   }, []);
+
+  // PWA: offline status + install prompt
+  const [online, setOnline] = useState(navigator.onLine);
+  const [installPrompt, setInstallPrompt] = useState(null);
+  useEffect(() => {
+    const up = () => setOnline(true);
+    const down = () => setOnline(false);
+    const onInstall = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+    window.addEventListener('online', up);
+    window.addEventListener('offline', down);
+    window.addEventListener('beforeinstallprompt', onInstall);
+    window.addEventListener('appinstalled', () => setInstallPrompt(null));
+    return () => {
+      window.removeEventListener('online', up);
+      window.removeEventListener('offline', down);
+      window.removeEventListener('beforeinstallprompt', onInstall);
+    };
+  }, []);
+
+  const handleInstall = async () => {
+    if (!installPrompt) return;
+    installPrompt.prompt();
+    await installPrompt.userChoice;
+    setInstallPrompt(null);
+  };
 
   const selectRoute = (id) => {
     setRutaActivaId(id);
@@ -60,7 +90,18 @@ function App() {
           <span className="hidden whitespace-nowrap text-body-strong font-bold text-ink lg:inline">
             Horarios de Transporte
           </span>
-          <div className="ml-auto flex w-full justify-end sm:max-w-md">
+          <div className="ml-auto flex w-full items-center justify-end gap-2 sm:max-w-md">
+            {installPrompt && (
+              <Button
+                size="sm"
+                onClick={handleInstall}
+                data-testid="install-app-button"
+                className="hidden shrink-0 sm:inline-flex"
+              >
+                <Download />
+                Instalar
+              </Button>
+            )}
             <GlobalSearch
               rutas={rutasOrdenadas}
               query={query}
@@ -69,6 +110,17 @@ function App() {
             />
           </div>
         </header>
+
+        {!online && (
+          <div
+            className="flex items-center justify-center gap-2 bg-secondary px-4 py-1.5 text-caption-md font-medium text-on-dark"
+            data-testid="offline-banner"
+            role="status"
+          >
+            <WifiOff className="size-4" />
+            Sin conexión — mostrando horarios guardados
+          </div>
+        )}
 
         {/* Mobile route picker keeps the fast tabs */}
         <div className="px-4 md:hidden">
