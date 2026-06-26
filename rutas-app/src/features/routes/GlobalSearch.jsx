@@ -6,7 +6,9 @@ const normalizar = (t) =>
 
 export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) {
   const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const boxRef = useRef(null);
+  const activeRef = useRef(null);
 
   const q = normalizar(query.trim());
   const results = q
@@ -23,6 +25,12 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
         .slice(0, 30)
     : [];
 
+  const showDropdown = open && q.length > 0;
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [query]);
+
   useEffect(() => {
     const onDown = (e) => {
       if (boxRef.current && !boxRef.current.contains(e.target)) setOpen(false);
@@ -31,7 +39,41 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
     return () => document.removeEventListener('mousedown', onDown);
   }, []);
 
-  const showDropdown = open && q.length > 0;
+  useEffect(() => {
+    if (showDropdown && activeRef.current) {
+      activeRef.current.scrollIntoView({ block: 'nearest' });
+    }
+  }, [activeIndex, showDropdown]);
+
+  const choose = (res) => {
+    onSelect(res.routeId, res.parada.no);
+    setOpen(false);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      if (query) onQueryChange('');
+      setOpen(false);
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setOpen(true);
+      setActiveIndex((i) => Math.min(i + 1, Math.max(results.length - 1, 0)));
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveIndex((i) => Math.max(i - 1, 0));
+      return;
+    }
+    if (e.key === 'Enter') {
+      if (showDropdown && results[activeIndex]) {
+        e.preventDefault();
+        choose(results[activeIndex]);
+      }
+    }
+  };
 
   return (
     <div ref={boxRef} className="relative w-full max-w-md">
@@ -45,12 +87,21 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
           type="text"
           inputMode="search"
           autoComplete="off"
+          role="combobox"
+          aria-expanded={showDropdown}
+          aria-controls="global-search-listbox"
+          aria-activedescendant={
+            showDropdown && results[activeIndex]
+              ? `option-${results[activeIndex].routeId}-${results[activeIndex].parada.no}`
+              : undefined
+          }
           value={query}
           onChange={(e) => {
             onQueryChange(e.target.value);
             setOpen(true);
           }}
           onFocus={() => setOpen(true)}
+          onKeyDown={onKeyDown}
           placeholder="Buscar parada en todas las rutas..."
           data-testid="global-search-input"
           className="w-full bg-transparent text-body-sm text-ink placeholder:text-ash focus:outline-none"
@@ -73,6 +124,7 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
 
       {showDropdown && (
         <div
+          id="global-search-listbox"
           className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[60vh] overflow-auto rounded-lg border border-hairline bg-surface p-1 shadow-soft"
           data-testid="global-search-results"
           role="listbox"
@@ -82,32 +134,37 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
               Sin resultados para “{query.trim()}”.
             </p>
           ) : (
-            results.map((res) => (
-              <button
-                key={`${res.routeId}-${res.parada.no}`}
-                type="button"
-                role="option"
-                aria-selected="false"
-                onClick={() => {
-                  onSelect(res.routeId, res.parada.no);
-                  setOpen(false);
-                }}
-                data-testid={`search-result-${res.routeId}-${res.parada.no}`}
-                className="flex w-full items-start gap-3 rounded-md px-3 py-2 text-left hover:bg-surface-card"
-              >
-                <span className="mt-0.5 shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-caption-md font-semibold text-primary">
-                  {res.routeId}
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-body-sm font-semibold text-ink">
-                    {res.parada.colonia}
+            results.map((res, i) => {
+              const active = i === activeIndex;
+              return (
+                <button
+                  key={`${res.routeId}-${res.parada.no}`}
+                  ref={active ? activeRef : null}
+                  id={`option-${res.routeId}-${res.parada.no}`}
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  onMouseEnter={() => setActiveIndex(i)}
+                  onClick={() => choose(res)}
+                  data-testid={`search-result-${res.routeId}-${res.parada.no}`}
+                  className={`flex w-full items-start gap-3 rounded-md px-3 py-2 text-left ${
+                    active ? 'bg-surface-card' : ''
+                  }`}
+                >
+                  <span className="mt-0.5 shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-caption-md font-semibold text-primary">
+                    {res.routeId}
                   </span>
-                  <span className="block truncate text-caption-md text-mute">
-                    {res.parada.referencia}
+                  <span className="min-w-0">
+                    <span className="block text-body-sm font-semibold text-ink">
+                      {res.parada.colonia}
+                    </span>
+                    <span className="block truncate text-caption-md text-mute">
+                      {res.parada.referencia}
+                    </span>
                   </span>
-                </span>
-              </button>
-            ))
+                </button>
+              );
+            })
           )}
         </div>
       )}
