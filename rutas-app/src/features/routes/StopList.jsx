@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronRight, Info } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import StopDetail from './StopDetail';
 
-export default function StopList({ ruta, paradas }) {
+export default function StopList({ ruta, paradas, targetStopNo }) {
+  const isMobile = useIsMobile();
   const [paradaActiva, setParadaActiva] = useState(null);
   const filas = paradas ?? ruta.paradas;
+
+  useEffect(() => {
+    if (targetStopNo == null || !isMobile) return;
+    const p = filas.find((x) => x.no === targetStopNo);
+    if (p) setParadaActiva(p);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [targetStopNo, isMobile]);
 
   return (
     <div className="mt-6" data-testid="stop-list">

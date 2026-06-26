@@ -1,9 +1,21 @@
-export default function RouteTable({ ruta, paradas }) {
+import { useEffect, useState } from 'react';
+
+export default function RouteTable({ ruta, paradas, targetStopNo }) {
   const tituloId = `titulo-tabla-${ruta.id}`;
   const filas = paradas ?? ruta.paradas;
+  const [pulse, setPulse] = useState(null);
+
+  useEffect(() => {
+    if (targetStopNo == null) return;
+    setPulse(targetStopNo);
+    const el = document.getElementById(`fila-${ruta.id}-${targetStopNo}`);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const t = setTimeout(() => setPulse(null), 2600);
+    return () => clearTimeout(t);
+  }, [targetStopNo, ruta.id]);
 
   return (
-    <figure className="mt-6 overflow-x-auto border border-hairline">
+    <figure className="mt-6 overflow-x-auto border border-hairline rounded-lg">
       <table
         className="w-full border-collapse text-table-cell sm:text-body-md"
         aria-labelledby={tituloId}
@@ -53,7 +65,13 @@ export default function RouteTable({ ruta, paradas }) {
         </thead>
         <tbody className="stagger">
           {filas.map((p, idx) => (
-            <tr key={p.no} className={idx % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'}>
+            <tr
+              key={p.no}
+              id={`fila-${ruta.id}-${p.no}`}
+              className={`${idx % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'} ${
+                pulse === p.no ? 'ring-2 ring-inset ring-primary' : ''
+              }`}
+            >
               <th
                 scope="row"
                 className="border border-hairline px-1 py-2 text-center font-bold"
