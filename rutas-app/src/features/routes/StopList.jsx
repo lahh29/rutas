@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import StopDetail from './StopDetail';
 
-export default function StopList({ ruta }) {
+export default function StopList({ ruta, paradas }) {
   const [paradaActiva, setParadaActiva] = useState(null);
+  const filas = paradas ?? ruta.paradas;
 
   return (
     <div className="mt-6" data-testid="stop-list">
@@ -17,7 +18,7 @@ export default function StopList({ ruta }) {
       </p>
 
       <ul className="border border-hairline" role="list">
-        {ruta.paradas.map((parada, idx) => (
+        {filas.map((parada, idx) => (
           <li key={parada.no}>
             <button
               type="button"

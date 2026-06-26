@@ -1,5 +1,6 @@
-export default function RouteTable({ ruta }) {
+export default function RouteTable({ ruta, paradas }) {
   const tituloId = `titulo-tabla-${ruta.id}`;
+  const filas = paradas ?? ruta.paradas;
 
   return (
     <figure className="mt-6 overflow-x-auto border border-hairline">
@@ -51,7 +52,7 @@ export default function RouteTable({ ruta }) {
           </tr>
         </thead>
         <tbody>
-          {ruta.paradas.map((p, idx) => (
+          {filas.map((p, idx) => (
             <tr key={p.no} className={idx % 2 === 0 ? 'bg-canvas' : 'bg-surface-soft'}>
               <th
                 scope="row"

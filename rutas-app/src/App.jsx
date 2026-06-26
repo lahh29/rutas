@@ -24,7 +24,7 @@ function App() {
           onSeleccionar={setRutaActivaId}
         />
 
-        <RoutePanel ruta={ruta} />
+        <RoutePanel key={ruta.id} ruta={ruta} />
 
         <Footer />
       </div>
