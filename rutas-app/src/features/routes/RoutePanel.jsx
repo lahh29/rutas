@@ -19,12 +19,17 @@ export default function RoutePanel({ ruta, targetStopNo }) {
       <Brandbar />
 
       <div className="flex flex-col gap-3 border-b border-hairline pb-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2
-          className="text-heading-md font-bold tracking-tight text-ink"
-          data-testid="route-name"
-        >
-          {ruta.nombre}
-        </h2>
+        <div>
+          <h2
+            className="text-heading-md font-bold tracking-tight text-ink"
+            data-testid="route-name"
+          >
+            {ruta.nombre}
+          </h2>
+          <p className="mt-0.5 text-caption-md text-mute" data-testid="route-meta">
+            {ruta.paradas.length} paradas · {ruta.turnos.length} turnos
+          </p>
+        </div>
         <RouteExport ruta={ruta} />
       </div>
 
