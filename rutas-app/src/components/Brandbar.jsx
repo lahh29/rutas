@@ -6,9 +6,9 @@ export default function Brandbar() {
     >
       <p
         className="text-2xl font-bold tracking-wider text-ink sm:text-3xl"
-        aria-label="Viño Plastic"
+        aria-label="VIÑOPLASTIC"
       >
-        VIÑO <span className="text-danger">PLASTIC</span>
+        VIÑO<span className="text-brand">PLASTIC</span>
       </p>
       <p
         className="text-2xl font-black italic leading-none text-ink sm:text-3xl"

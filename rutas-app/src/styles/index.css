@@ -27,6 +27,9 @@
   --color-warning: #ff9f0a;
   --color-success: #30d158;
 
+  /* === Brand (company navy) === */
+  --color-brand: #1b2a6b;
+
   /* === Typography: single monospaced face === */
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular,
     Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
