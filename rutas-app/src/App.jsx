@@ -11,7 +11,9 @@ function App() {
   const rutasOrdenadas = [...rutas].sort((a, b) =>
     a.id.localeCompare(b.id, undefined, { numeric: true })
   );
-  const [rutaActivaId, setRutaActivaId] = useState(rutasOrdenadas[0].id);
+  const [rutaActivaId, setRutaActivaId] = useState(
+    () => localStorage.getItem('rutaActiva') || rutasOrdenadas[0].id
+  );
   const [query, setQuery] = useState('');
   const [targetStopNo, setTargetStopNo] = useState(null);
   const ruta = rutas.find((r) => r.id === rutaActivaId) ?? rutasOrdenadas[0];
@@ -25,11 +27,13 @@ function App() {
 
   const selectRoute = (id) => {
     setRutaActivaId(id);
+    localStorage.setItem('rutaActiva', id);
     setTargetStopNo(null);
   };
 
   const selectSearchResult = (routeId, stopNo) => {
     setRutaActivaId(routeId);
+    localStorage.setItem('rutaActiva', routeId);
     setTargetStopNo(stopNo);
     setQuery('');
   };
