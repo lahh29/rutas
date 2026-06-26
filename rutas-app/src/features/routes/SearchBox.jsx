@@ -1,13 +1,13 @@
+import { Search, X } from 'lucide-react';
+
 export default function SearchBox({ value, onChange, resultCount }) {
   return (
-    <div className="mt-6" data-testid="stop-search">
+    <div data-testid="stop-search">
       <label htmlFor="buscar-parada" className="sr-only">
         Buscar parada por colonia o referencia
       </label>
-      <div className="flex items-center gap-2 rounded-sm border border-hairline bg-surface-soft px-3 py-2 focus-within:border-ink focus-within:bg-canvas">
-        <span className="select-none text-body-md text-mute" aria-hidden="true">
-          [/]
-        </span>
+      <div className="flex items-center gap-2 rounded-xs border border-hairline-strong bg-surface px-3 py-2 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+        <Search className="size-4 shrink-0 text-ash" aria-hidden="true" />
         <input
           id="buscar-parada"
           type="text"
@@ -17,7 +17,7 @@ export default function SearchBox({ value, onChange, resultCount }) {
           onChange={(e) => onChange(e.target.value)}
           placeholder="Buscar parada o colonia..."
           data-testid="stop-search-input"
-          className="w-full bg-transparent text-body-md text-ink placeholder:text-stone focus:outline-none"
+          className="w-full bg-transparent text-body-md text-ink placeholder:text-ash focus:outline-none"
         />
         {value && (
           <button
@@ -25,9 +25,9 @@ export default function SearchBox({ value, onChange, resultCount }) {
             onClick={() => onChange('')}
             aria-label="Limpiar búsqueda"
             data-testid="stop-search-clear"
-            className="select-none text-body-md font-bold text-mute"
+            className="shrink-0 rounded-full p-0.5 text-mute hover:bg-surface-card"
           >
-            [x]
+            <X className="size-4" />
           </button>
         )}
       </div>

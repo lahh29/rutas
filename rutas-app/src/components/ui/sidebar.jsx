@@ -275,13 +275,13 @@ export const SidebarMenuButton = React.forwardRef(
         type="button"
         data-active={isActive}
         className={cn(
-          'peer/menu-button flex w-full items-center gap-3 overflow-hidden rounded-sm p-2 text-left text-body-strong outline-none transition-colors duration-150',
-          'focus-visible:ring-2 focus-visible:ring-ink',
+          'peer/menu-button flex w-full items-center gap-3 overflow-hidden rounded-md p-2 text-left text-body-strong outline-none transition-colors duration-150',
+          'focus-visible:ring-2 focus-visible:ring-primary',
           'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
           'group-data-[collapsible=icon]:size-9 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0',
           '[&>svg]:size-5 [&>svg]:shrink-0',
           isActive
-            ? 'bg-ink text-on-dark hover:bg-ink hover:text-on-dark'
+            ? 'bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary'
             : 'text-sidebar-foreground',
           className
         )}

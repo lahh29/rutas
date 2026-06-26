@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
 import useHistoryDismiss from '../../hooks/useHistoryDismiss';
 import useBodyScrollLock from '../../hooks/useBodyScrollLock';
 
@@ -38,9 +39,10 @@ export default function StopDetail({ ruta, parada, onClose }) {
           onClick={requestClose}
           data-testid="stop-detail-close"
           aria-label="Cerrar detalle de la parada"
-          className="rounded-sm border border-hairline-strong bg-canvas px-4 text-button-md text-ink"
+          className="inline-flex items-center gap-1.5 rounded-md border border-hairline bg-surface px-3 py-1.5 text-button-md text-ink shadow-soft hover:bg-surface-card"
         >
-          [x] Cerrar
+          <X className="size-4" />
+          Cerrar
         </button>
       </div>
 
@@ -68,14 +70,14 @@ export default function StopDetail({ ruta, parada, onClose }) {
           <p className="mb-2 text-caption-md uppercase tracking-wide text-mute">
             Horarios
           </p>
-          <ul className="border border-hairline" role="list">
+          <ul className="overflow-hidden rounded-lg border border-hairline" role="list">
             {ruta.turnos.map((turno, i) => (
               <li
                 key={i}
                 data-testid={`stop-detail-turno-${i}`}
                 className={`flex items-center justify-between px-4 py-3 ${
                   i !== 0 ? 'border-t border-hairline' : ''
-                } ${i % 2 === 0 ? 'bg-canvas' : 'bg-surface-soft'}`}
+                } ${i % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'}`}
               >
                 <span className="text-body-strong text-ink">{turno}</span>
                 <span className="text-body-md tabular-nums text-ink">

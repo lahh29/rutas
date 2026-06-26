@@ -21,8 +21,8 @@ export default defineConfig({
         description:
           'Horarios oficiales de transporte de personal. Rutas, paradas y turnos.',
         lang: 'es',
-        theme_color: '#fdfcfc',
-        background_color: '#fdfcfc',
+        theme_color: '#f6f5f4',
+        background_color: '#f6f5f4',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',

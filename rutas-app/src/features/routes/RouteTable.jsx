@@ -14,7 +14,7 @@ export default function RouteTable({ ruta, paradas }) {
           referencia y turnos.
         </caption>
         <thead>
-          <tr className="bg-ink text-on-dark">
+          <tr className="bg-surface-card text-ink">
             <th scope="col" className="w-10 border border-hairline px-1 py-2">
               No.
             </th>
@@ -32,7 +32,7 @@ export default function RouteTable({ ruta, paradas }) {
               Horario
             </th>
           </tr>
-          <tr className="border-b border-hairline-strong bg-surface-soft text-ink">
+          <tr className="border-b border-hairline bg-surface-soft text-ink">
             <th
               scope="col"
               colSpan={3}
@@ -53,14 +53,14 @@ export default function RouteTable({ ruta, paradas }) {
         </thead>
         <tbody className="stagger">
           {filas.map((p, idx) => (
-            <tr key={p.no} className={idx % 2 === 0 ? 'bg-canvas' : 'bg-surface-soft'}>
+            <tr key={p.no} className={idx % 2 === 0 ? 'bg-surface' : 'bg-surface-soft'}>
               <th
                 scope="row"
                 className="border border-hairline px-1 py-2 text-center font-bold"
               >
                 {p.no}
               </th>
-              <td className="border border-hairline px-3 py-2 text-left font-bold uppercase md:whitespace-nowrap">
+              <td className="border border-hairline px-3 py-2 text-left font-semibold md:whitespace-nowrap">
                 {p.colonia}
               </td>
               <td className="border border-hairline px-3 py-2 text-left text-body">

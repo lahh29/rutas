@@ -22,7 +22,7 @@ export default function RouteSidebar({ rutas, rutaActivaId, onSeleccionar, loadi
     <Sidebar>
       <SidebarHeader>
         <div className="flex min-w-0 items-center gap-2 px-1 py-1">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-ink text-on-dark">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary text-on-dark">
             <Bus className="size-5" />
           </span>
           {!colapsada && (
@@ -58,7 +58,7 @@ export default function RouteSidebar({ rutas, rutaActivaId, onSeleccionar, loadi
                         <span className="flex h-5 min-w-[1.75rem] shrink-0 items-center justify-center text-body-strong font-bold tabular-nums">
                           {ruta.id}
                         </span>
-                        <span className="truncate text-caption-md text-mute group-data-[active=true]:text-ash">
+                        <span className="truncate text-caption-md text-mute group-data-[active=true]:text-primary">
                           {titulo}
                         </span>
                       </SidebarMenuButton>

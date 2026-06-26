@@ -3,6 +3,7 @@ import Brandbar from '../../components/Brandbar';
 import RouteTable from './RouteTable';
 import StopList from './StopList';
 import SearchBox from './SearchBox';
+import RouteExport from './RouteExport';
 import PanelSkeleton from './PanelSkeleton';
 import useDelayedLoading from '../../hooks/useDelayedLoading';
 
@@ -33,23 +34,28 @@ export default function RoutePanel({ ruta }) {
       id={`panel-${ruta.id}`}
       role="tabpanel"
       aria-labelledby={`tab-${ruta.id}`}
-      className="animate-fade-in-up border border-hairline bg-canvas p-5 sm:p-8 lg:p-10"
+      className="animate-fade-in-up rounded-xl border border-hairline bg-surface p-5 shadow-soft sm:p-8 lg:p-10"
       data-testid="route-panel"
     >
       <Brandbar />
 
       <h2
-        className="bg-ink px-4 py-2.5 text-center text-heading-md uppercase tracking-wide text-on-dark"
+        className="border-b border-hairline pb-3 text-heading-md font-bold tracking-tight text-ink"
         data-testid="route-name"
       >
-        Nombre de la ruta: {ruta.nombre}
+        {ruta.nombre}
       </h2>
 
-      <SearchBox
-        value={query}
-        onChange={setQuery}
-        resultCount={paradasFiltradas.length}
-      />
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-start">
+        <div className="flex-1">
+          <SearchBox
+            value={query}
+            onChange={setQuery}
+            resultCount={paradasFiltradas.length}
+          />
+        </div>
+        <RouteExport ruta={ruta} />
+      </div>
 
       {loading ? (
         <PanelSkeleton rows={Math.min(ruta.paradas.length, 8)} />

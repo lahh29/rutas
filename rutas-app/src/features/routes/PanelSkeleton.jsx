@@ -5,7 +5,7 @@ export default function PanelSkeleton({ rows = 8 }) {
   return (
     <div className="mt-6" data-testid="panel-skeleton" aria-hidden="true">
       {/* Desktop: table-like skeleton */}
-      <div className="hidden border border-hairline md:block">
+      <div className="hidden overflow-hidden rounded-lg border border-hairline md:block">
         <Skeleton className="h-10 w-full rounded-none" />
         {list.map((_, i) => (
           <div key={i} className="flex items-center gap-3 border-t border-hairline px-3 py-3">
@@ -19,7 +19,7 @@ export default function PanelSkeleton({ rows = 8 }) {
       </div>
 
       {/* Mobile: row skeleton */}
-      <div className="border border-hairline md:hidden">
+      <div className="overflow-hidden rounded-lg border border-hairline md:hidden">
         {list.map((_, i) => (
           <div key={i} className="flex items-center gap-3 border-b border-hairline px-3 py-4 last:border-b-0">
             <Skeleton className="h-4 w-5" />

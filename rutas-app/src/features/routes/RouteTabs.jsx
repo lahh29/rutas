@@ -4,7 +4,7 @@ export default function RouteTabs({ rutas, rutaActivaId, onSeleccionar }) {
   );
   return (
     <nav
-      className="mb-8 overflow-x-auto border-b border-hairline-strong"
+      className="mb-8 overflow-x-auto border-b border-hairline"
       role="tablist"
       aria-label="Seleccionar ruta de transporte"
       data-testid="route-tabs"
@@ -24,7 +24,7 @@ export default function RouteTabs({ rutas, rutaActivaId, onSeleccionar }) {
               data-testid={`tab-${ruta.id}`}
               className={`flex-shrink-0 px-5 py-3 text-button-md transition-colors duration-150 ${
                 activa
-                  ? '-mb-px border-b-2 border-ash text-ink'
+                  ? '-mb-px border-b-2 border-primary text-primary font-semibold'
                   : 'border-b-2 border-transparent text-mute'
               }`}
             >

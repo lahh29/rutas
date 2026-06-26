@@ -1,58 +1,58 @@
 @import "tailwindcss";
 
 @theme {
-  /* === Brand & ink ladder (design.md · Colors) === */
-  --color-canvas: #fdfcfc;
-  --color-ink: #201d1d;
-  --color-ink-deep: #0f0000;
-  --color-charcoal: #302c2c;
-  --color-body: #424245;
-  --color-mute: #646262;
-  --color-stone: #6e6e73;
-  --color-ash: #9a9898;
-
   /* === Surfaces === */
-  --color-surface-soft: #f8f7f7;
-  --color-surface-card: #f1eeee;
-  --color-surface-dark: #201d1d;
-  --color-surface-dark-elevated: #302c2c;
-  --color-hairline: rgba(15, 0, 0, 0.12);
-  --color-hairline-strong: #646262;
-  --color-on-dark: #fdfcfc;
-  --color-on-primary: #fdfcfc;
+  --color-canvas: #f6f5f4;        /* warm paper page background */
+  --color-surface: #ffffff;       /* white cards / fields */
+  --color-surface-soft: #f6f5f4;
+  --color-surface-card: #f0efed;  /* hover / skeleton / tinted rows */
+  --color-surface-dark: #213183;  /* indigo "night" */
+  --color-hairline: #e6e6e6;
+  --color-hairline-strong: #dddddd;
 
-  /* === Semantic ramp (reserved) === */
-  --color-accent: #007aff;
-  --color-danger: #ff3b30;
-  --color-warning: #ff9f0a;
-  --color-success: #30d158;
+  /* === Text === */
+  --color-ink: #1a1a19;
+  --color-ink-deep: #000000;
+  --color-charcoal: #31302e;
+  --color-body: #31302e;
+  --color-mute: #615d59;
+  --color-stone: #615d59;
+  --color-ash: #a39e98;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
 
-  /* === Brand (company navy) === */
-  --color-brand: #1b2a6b;
+  /* === Structural accent (only one) === */
+  --color-primary: #0075de;
+  --color-primary-active: #005bab;
+  --color-secondary: #213183;     /* deep indigo */
+  --color-brand: #1b2a6b;         /* company wordmark navy */
 
-  /* === Sidebar (shadcn) === */
-  --color-sidebar: #fdfcfc;
-  --color-sidebar-foreground: #201d1d;
-  --color-sidebar-border: rgba(15, 0, 0, 0.12);
-  --color-sidebar-accent: #f1eeee;
-  --color-sidebar-accent-foreground: #201d1d;
+  /* === Decorative sticker palette (illustration only) === */
+  --color-accent-sky: #62aef0;
+  --color-accent-purple: #d6b6f6;
+  --color-accent-pink: #ff64c8;
+  --color-accent-orange: #dd5b00;
+  --color-accent-teal: #2a9d99;
+  --color-accent-green: #1aae39;
 
-  /* === Typography: single monospaced face === */
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* === Typography (NotionInter ≈ Inter) === */
+  --font-sans: "Inter", -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif;
 
-  /* === Type scale (design.md · Typography) === */
-  --text-display-xl: 38px;
-  --text-display-xl--line-height: 1.5;
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 1.1;
   --text-display-xl--font-weight: 700;
+  --text-display-xl--letter-spacing: -1px;
 
-  --text-display-mobile: 26px;
-  --text-display-mobile--line-height: 1.5;
+  --text-display-mobile: 28px;
+  --text-display-mobile--line-height: 1.15;
   --text-display-mobile--font-weight: 700;
+  --text-display-mobile--letter-spacing: -0.5px;
 
-  --text-heading-md: 16px;
-  --text-heading-md--line-height: 1.5;
+  --text-heading-md: 20px;
+  --text-heading-md--line-height: 1.4;
   --text-heading-md--font-weight: 700;
+  --text-heading-md--letter-spacing: -0.125px;
 
   --text-body-md: 16px;
   --text-body-md--line-height: 1.5;
@@ -60,27 +60,39 @@
 
   --text-body-strong: 16px;
   --text-body-strong--line-height: 1.5;
-  --text-body-strong--font-weight: 500;
+  --text-body-strong--font-weight: 600;
 
   --text-button-md: 16px;
-  --text-button-md--line-height: 2;
+  --text-button-md--line-height: 1.5;
   --text-button-md--font-weight: 500;
 
   --text-caption-md: 14px;
-  --text-caption-md--line-height: 2;
+  --text-caption-md--line-height: 1.43;
   --text-caption-md--font-weight: 400;
 
-  --text-table-cell: 13px;
-  --text-table-cell--line-height: 1.5;
+  --text-table-cell: 15px;
+  --text-table-cell--line-height: 1.4;
 
-  /* === Spacing & radius === */
+  /* === Radius === */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* === Sidebar (shadcn) === */
+  --color-sidebar: #ffffff;
+  --color-sidebar-foreground: #1a1a19;
+  --color-sidebar-border: #e6e6e6;
+  --color-sidebar-accent: #f0efed;
+  --color-sidebar-accent-foreground: #1a1a19;
+
   --spacing-section: 96px;
-  --radius-sm: 4px;
 }
 
 @layer base {
   html {
-    @apply bg-canvas text-ink font-mono antialiased;
+    @apply bg-canvas text-ink font-sans antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -89,11 +101,10 @@
   body {
     @apply min-h-screen;
   }
-  /* Flat, halo-free focus signal (design.md · Inputs/Forms) */
   :where(button, a, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
   }
   * {
     -webkit-print-color-adjust: exact !important;
@@ -101,43 +112,29 @@
   }
 }
 
+/* Barely-there layered elevation (Notion Level-1) */
+.shadow-soft {
+  box-shadow:
+    rgba(0, 0, 0, 0.01) 0 0.175px 1.041px,
+    rgba(0, 0, 0, 0.02) 0 0.8px 2.925px,
+    rgba(0, 0, 0, 0.027) 0 2.025px 7.847px,
+    rgba(0, 0, 0, 0.04) 0 4px 18px;
+}
+
 /* Full-screen detail sheet entrance (mobile) */
 @keyframes sheet-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.animate-sheet {
-  animation: sheet-in 0.22s ease-out both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-sheet {
-    animation: none;
-  }
-}
+.animate-sheet { animation: sheet-in 0.22s ease-out both; }
 
 /* Panel / list entrance */
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in-up {
-  animation: fade-in-up 0.28s ease-out both;
-}
-.stagger > * {
-  animation: fade-in-up 0.3s ease-out both;
-}
+.animate-fade-in-up { animation: fade-in-up 0.28s ease-out both; }
+.stagger > * { animation: fade-in-up 0.3s ease-out both; }
 .stagger > *:nth-child(1)  { animation-delay: 0.02s; }
 .stagger > *:nth-child(2)  { animation-delay: 0.04s; }
 .stagger > *:nth-child(3)  { animation-delay: 0.06s; }
@@ -149,8 +146,7 @@
 .stagger > *:nth-child(n+9) { animation-delay: 0.18s; }
 
 @media (prefers-reduced-motion: reduce) {
+  .animate-sheet,
   .animate-fade-in-up,
-  .stagger > * {
-    animation: none;
-  }
+  .stagger > * { animation: none; }
 }

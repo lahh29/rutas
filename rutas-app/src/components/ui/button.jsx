@@ -4,14 +4,15 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-button-md font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-button-md font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: 'bg-ink text-on-primary hover:bg-charcoal active:bg-ink-deep',
+        default:
+          'rounded-full bg-primary text-on-primary hover:bg-primary-active active:scale-95',
         outline:
-          'border border-hairline-strong bg-canvas text-ink hover:bg-surface-card',
-        ghost: 'text-ink hover:bg-surface-card',
+          'rounded-md border border-hairline bg-surface text-ink shadow-soft hover:bg-surface-card',
+        ghost: 'rounded-md text-ink hover:bg-surface-card',
       },
       size: {
         default: 'h-9 px-5 py-1',
