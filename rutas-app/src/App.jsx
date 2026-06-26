@@ -5,8 +5,11 @@ import RoutePanel from './features/routes/RoutePanel';
 import Footer from './components/Footer';
 
 function App() {
-  const [rutaActivaId, setRutaActivaId] = useState(rutas[0].id);
-  const ruta = rutas.find((r) => r.id === rutaActivaId) ?? rutas[0];
+  const rutasOrdenadas = [...rutas].sort((a, b) =>
+    a.id.localeCompare(b.id, undefined, { numeric: true })
+  );
+  const [rutaActivaId, setRutaActivaId] = useState(rutasOrdenadas[0].id);
+  const ruta = rutas.find((r) => r.id === rutaActivaId) ?? rutasOrdenadas[0];
 
   return (
     <main className="min-h-screen bg-canvas" data-testid="app-root">

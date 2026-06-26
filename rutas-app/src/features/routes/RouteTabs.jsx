@@ -1,4 +1,7 @@
 export default function RouteTabs({ rutas, rutaActivaId, onSeleccionar }) {
+  const rutasOrdenadas = [...rutas].sort((a, b) =>
+    a.id.localeCompare(b.id, undefined, { numeric: true })
+  );
   return (
     <nav
       className="mb-8 overflow-x-auto border-b border-hairline-strong"
@@ -7,7 +10,7 @@ export default function RouteTabs({ rutas, rutaActivaId, onSeleccionar }) {
       data-testid="route-tabs"
     >
       <div className="flex min-w-full">
-        {rutas.map((ruta) => {
+        {rutasOrdenadas.map((ruta) => {
           const activa = ruta.id === rutaActivaId;
           return (
             <button
