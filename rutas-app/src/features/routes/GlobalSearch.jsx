@@ -9,6 +9,7 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
   const [activeIndex, setActiveIndex] = useState(0);
   const boxRef = useRef(null);
   const activeRef = useRef(null);
+  const inputRef = useRef(null);
 
   const q = normalizar(query.trim());
   const results = q
@@ -37,6 +38,21 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
     };
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key !== '/') return;
+      const el = document.activeElement;
+      const typing =
+        el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+      if (typing) return;
+      e.preventDefault();
+      inputRef.current?.focus();
+      setOpen(true);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
@@ -84,6 +100,7 @@ export default function GlobalSearch({ rutas, query, onQueryChange, onSelect }) 
         <Search className="size-4 shrink-0 text-ash" aria-hidden="true" />
         <input
           id="busqueda-global"
+          ref={inputRef}
           type="text"
           inputMode="search"
           autoComplete="off"
