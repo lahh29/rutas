@@ -17,7 +17,7 @@ export default function StopList({ ruta, paradas }) {
         <span>Toca una parada para ver su referencia y horarios.</span>
       </p>
 
-      <ul className="border border-hairline" role="list">
+      <ul className="stagger border border-hairline" role="list">
         {filas.map((parada, idx) => (
           <li key={parada.no}>
             <button

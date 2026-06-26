@@ -30,6 +30,13 @@
   /* === Brand (company navy) === */
   --color-brand: #1b2a6b;
 
+  /* === Sidebar (shadcn) === */
+  --color-sidebar: #fdfcfc;
+  --color-sidebar-foreground: #201d1d;
+  --color-sidebar-border: rgba(15, 0, 0, 0.12);
+  --color-sidebar-accent: #f1eeee;
+  --color-sidebar-accent-foreground: #201d1d;
+
   /* === Typography: single monospaced face === */
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular,
     Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -110,6 +117,40 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-sheet {
+    animation: none;
+  }
+}
+
+/* Panel / list entrance */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.28s ease-out both;
+}
+.stagger > * {
+  animation: fade-in-up 0.3s ease-out both;
+}
+.stagger > *:nth-child(1)  { animation-delay: 0.02s; }
+.stagger > *:nth-child(2)  { animation-delay: 0.04s; }
+.stagger > *:nth-child(3)  { animation-delay: 0.06s; }
+.stagger > *:nth-child(4)  { animation-delay: 0.08s; }
+.stagger > *:nth-child(5)  { animation-delay: 0.10s; }
+.stagger > *:nth-child(6)  { animation-delay: 0.12s; }
+.stagger > *:nth-child(7)  { animation-delay: 0.14s; }
+.stagger > *:nth-child(8)  { animation-delay: 0.16s; }
+.stagger > *:nth-child(n+9) { animation-delay: 0.18s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .stagger > * {
     animation: none;
   }
 }

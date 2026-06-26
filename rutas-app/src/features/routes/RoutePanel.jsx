@@ -4,6 +4,8 @@ import Notes from '../../components/Notes';
 import RouteTable from './RouteTable';
 import StopList from './StopList';
 import SearchBox from './SearchBox';
+import PanelSkeleton from './PanelSkeleton';
+import useDelayedLoading from '../../hooks/useDelayedLoading';
 
 const normalizar = (texto) =>
   texto
@@ -13,6 +15,7 @@ const normalizar = (texto) =>
 
 export default function RoutePanel({ ruta }) {
   const [query, setQuery] = useState('');
+  const loading = useDelayedLoading(ruta.id, 350);
 
   const paradasFiltradas = useMemo(() => {
     const q = normalizar(query.trim());
@@ -31,7 +34,7 @@ export default function RoutePanel({ ruta }) {
       id={`panel-${ruta.id}`}
       role="tabpanel"
       aria-labelledby={`tab-${ruta.id}`}
-      className="border border-hairline bg-canvas p-5 sm:p-8 lg:p-10"
+      className="animate-fade-in-up border border-hairline bg-canvas p-5 sm:p-8 lg:p-10"
       data-testid="route-panel"
     >
       <Brandbar />
@@ -49,7 +52,9 @@ export default function RoutePanel({ ruta }) {
         resultCount={paradasFiltradas.length}
       />
 
-      {sinResultados ? (
+      {loading ? (
+        <PanelSkeleton rows={Math.min(ruta.paradas.length, 8)} />
+      ) : sinResultados ? (
         <p
           className="mt-6 flex items-start gap-2 border border-hairline bg-surface-soft px-4 py-4 text-body-md text-body"
           data-testid="stop-search-empty"

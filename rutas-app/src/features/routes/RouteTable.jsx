@@ -51,7 +51,7 @@ export default function RouteTable({ ruta, paradas }) {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="stagger">
           {filas.map((p, idx) => (
             <tr key={p.no} className={idx % 2 === 0 ? 'bg-canvas' : 'bg-surface-soft'}>
               <th
