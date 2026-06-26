@@ -54,6 +54,11 @@ export default function RouteSidebar({ rutas, rutaActivaId, onSeleccionar, loadi
                         onClick={() => onSeleccionar(ruta.id)}
                         aria-current={activa ? 'page' : undefined}
                         data-testid={`sidebar-route-${ruta.id}`}
+                        className={
+                          activa
+                            ? ''
+                            : 'opacity-50 blur-[1.3px] transition-all duration-200 hover:opacity-100 hover:blur-0'
+                        }
                       >
                         <span className="flex h-5 min-w-[1.75rem] shrink-0 items-center justify-center text-body-strong font-bold tabular-nums">
                           {ruta.id}
